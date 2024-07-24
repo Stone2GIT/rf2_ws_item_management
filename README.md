@@ -25,4 +25,4 @@ PS1 files need to be opened with editor once in order to get rid of the signing 
 
 or
 
-4. run rf2_steamid_inputbox.ps1 for running ws_installer with SteamID
+4. run rf2_steamid_inputbox.ps1 for running ws_installer with argument(s)
