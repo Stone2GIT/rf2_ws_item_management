@@ -22,3 +22,7 @@ PS1 files need to be opened with editor once in order to get rid of the signing 
 3. configure RF2ROOT in variables.ps1
 
 4. run scripts from command line (installer needs SteamID as argument, e.g. rf2_ws_item_installer.ps1 123456789)
+
+or
+
+4. run rf2_steamid_inputbox.ps1 for running ws_installer with SteamID
