@@ -7,6 +7,8 @@
 # source variables
 . ./variables.ps1
 
+$CURRENTLOCATION=((Get-Location).Path)
+
 # getting SteamIDs by simply using $args
 $STEAMIDS=$args
 
@@ -28,7 +30,8 @@ foreach ($STEAMID in $STEAMIDS)
     # install each RFCMP with modmgr ... assuming modmgr is configured
     foreach ($RFCMP in $RFCMPS)
     {
-        #& "$RF2ROOT\bin64\ModMgr.exe" -i"$RFCMP" -p"$RF2WORKSHOPPKGS\$STEAMID" -d"$RF2ROOT"
+        write-host "Installing "$RFCMP
+        
         $ARGUMENTS=" -i""$RFCMP"" -p""$RF2WORKSHOPPKGS\$STEAMID"" -d""$RF2ROOT"" -c""$RF2ROOT"" -o""$RF2ROOT"" "
         start-process -FilePath "$RF2ROOT\bin64\ModMgr.exe" -ArgumentList $ARGUMENTS -nonewwindow -wait
 
