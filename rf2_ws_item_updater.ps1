@@ -46,7 +46,7 @@ foreach ($STEAMID in $STEAMIDS)
     write-host "Finished generating script file."
 
     # generating arguments string
-    $ARGUMENTS=" +force_install_dir ""$RF2ROOT"" +login anonymous +runscript $RF2ROOT\$CURRENTDATE"".ids"" +quit"
+    $ARGUMENTS=" +force_install_dir ""$RF2ROOT"" +login anonymous +runscript $CURRENTLOCATION\$CURRENTDATE"".ids"" +quit"
     
     #
     # 07/2024
