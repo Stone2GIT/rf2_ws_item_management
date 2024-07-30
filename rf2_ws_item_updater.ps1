@@ -56,9 +56,11 @@ foreach ($STEAMID in $STEAMIDS)
     # downloading the workshop item
     start-process "$STEAMINSTALLDIR\steamcmd" -ArgumentList $ARGUMENTS -NoNewWindow -wait
 
+foreach ($STEAMID in $STEAMIDS)
+ {  
     # looking for RFCMP to install (need to be sorted, think of GT3 vehicles, 3.60 base, 3.61 update)
-    # $RFCMPS=(gci $RF2WORKSHOPPKGS\$STEAMID *.rfcmp -recurse| select -Expand Name|sort)
-    $RFCMPS=(gci $RF2WORKSHOPPKGS *.rfcmp -recurse| select -Expand Name|sort)
+    $RFCMPS=(gci $RF2WORKSHOPPKGS\$STEAMID *.rfcmp -recurse| select -Expand Name|sort)
+    #$RFCMPS=(gci $RF2WORKSHOPPKGS *.rfcmp -recurse| select -Expand Name|sort)
     
     # install each RFCMP with modmgr ... assuming modmgr is configured
     foreach ($RFCMP in $RFCMPS)
@@ -71,6 +73,7 @@ foreach ($STEAMID in $STEAMIDS)
         # start-process does not really wait for modmgr having finished so we need some xtra wait
         start-sleep -seconds 3
     }
+}
 
     del $CURRENTDATE".ids"
  
