@@ -13,7 +13,7 @@
 # source variables
 . ./variables.ps1
 
-$CURRENTDATE=(Get-Date -Format "MMdd")
+$CURRENTDATE=(Get-Date -Format "yyMMdd")
 $CURRENTLOCATION=((Get-Location).Path)
 
 # getting SteamIDs by simply using $args
