@@ -4,11 +4,11 @@
 # Stone, 07/2024, info@simracingjustfair.org
 #
 
-# where is rfactor 2 located (currently program files (x86) is not supported)
+# where is rfactor 2 located
 $RF2ROOT="$HOME\rf2ds"
 
-# where do we find the downloaded workshop packages
-$RF2WORKSHOPPKGS="$RF2ROOT\steamapps\workshop\content\365960"
+# where is steam installed if ...
+$STEAMBASEPATH="$RF2ROOT"
 
-# as SteamCMD needs to be installed, where to find it
-$STEAMINSTALLDIR="$RF2ROOT\steamcmd"
+# where do we find the downloaded workshop packages
+$RF2WORKSHOPPKGS="$STEAMBASEPATH\steamapps\workshop\content\365960"

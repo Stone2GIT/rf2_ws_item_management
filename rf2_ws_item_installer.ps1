@@ -12,6 +12,20 @@ $CURRENTLOCATION=((Get-Location).Path)
 # getting SteamIDs by simply using $args
 $STEAMIDS=$args
 
+# if there is no SteamCMD directory
+if (-not (Test-Path "$CURRENTLOCATION\SteamCMD")) {
+
+ mkdir $CURRENTLOCATION\SteamCMD
+
+ # download SteamCMD
+ $ARGUMENTS="Invoke-RestMethod -Uri https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip -OutFile $CURRENTLOCATION\SteamCMD\steamcmd.zip"
+ start-process -FilePath powershell -ArgumentList $ARGUMENTS -NoNewWindow -Wait
+
+ # extract SteamCMD
+ $ARGUMENTS="Expand-Archive -Force $CURRENTLOCATION\SteamCMD\steamcmd.zip -DestinationPath ""$CURRENTLOCATION\SteamCMD"""
+ start-process -FilePath powershell -ArgumentList $ARGUMENTS -NoNewWindow -Wait
+}
+
 # what to do with the given IDs
 foreach ($STEAMID in $STEAMIDS)
  {  
@@ -19,10 +33,10 @@ foreach ($STEAMID in $STEAMIDS)
     write-host "Downloading SteamID "$STEAMID
 
     # generating arguments string
-    $ARGUMENTS=" +force_install_dir ""$RF2ROOT"" +login anonymous +workshop_download_item 365960 $STEAMID +quit"
+    $ARGUMENTS=" +force_install_dir ""$STEAMBASEPATH"" +login anonymous +workshop_download_item 365960 $STEAMID +quit"
     
     # downloading the workshop item
-    start-process "$STEAMINSTALLDIR\steamcmd" -ArgumentList $ARGUMENTS -NoNewWindow -wait
+    start-process "$CURRENTLOCATION\SteamCMD\steamcmd.exe" -ArgumentList $ARGUMENTS -NoNewWindow -wait
 
     # looking for RFCMP to install (need to be sorted, think of GT3 vehicles, 3.60 base, 3.61 update)
     $RFCMPS=(gci $RF2WORKSHOPPKGS\$STEAMID *.rfcmp -recurse| select -Expand Name|sort)
