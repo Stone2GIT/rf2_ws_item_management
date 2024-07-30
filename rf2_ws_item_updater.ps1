@@ -76,5 +76,5 @@ foreach ($STEAMID in $STEAMIDS)
     }
 }
 
-    del $CURRENTDATE".ids"
+    del $CURRENTLOCATION".ids"
  
