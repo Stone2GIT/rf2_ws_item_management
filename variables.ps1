@@ -5,10 +5,10 @@
 #
 
 # where is rfactor 2 located
-$RF2ROOT="$HOME\rf2ds"
+$RF2ROOT="c:\program files (x86)\steam\steamapps\common\rfactor 2"
 
 # where is steam installed if ...
-$STEAMBASEPATH="$RF2ROOT"
+$STEAMBASEPATH="c:\program files (x86)\steam"
 
 # where do we find the downloaded workshop packages
 $RF2WORKSHOPPKGS="$STEAMBASEPATH\steamapps\workshop\content\365960"
