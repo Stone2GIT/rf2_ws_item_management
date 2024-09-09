@@ -11,6 +11,7 @@ $RF2ROOT="$HOME\rf2ds"
 # where is steam installed if ...
 # $STEAMBASEPATH="c:\program files (x86)\steam"
 $STEAMBASEPATH="$RF2ROOT"
+$STEAMINSTALLDIR="$STEAMBASEPATH\steamcmd"
 
 # where do we find the downloaded workshop packages
 $RF2WORKSHOPPKGS="$STEAMBASEPATH\steamapps\workshop\content\365960"
