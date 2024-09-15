@@ -45,11 +45,30 @@ foreach ($STEAMID in $STEAMIDS)
     # simple message  
     write-host "Finished generating script file."
 
+#    # generating arguments string
+#    $ARGUMENTS=" +force_install_dir ""$STEAMBASEDIR"" +login anonymous +runscript $CURRENTLOCATION\$CURRENTDATE"".ids"" +quit"
+#    
+#    # downloading the workshop items
+#    start-process "$CURRENTLOCATION\SteamCMD\steamcmd.exe" -ArgumentList $ARGUMENTS -NoNewWindow -wait
+
+
+###
+# what to do with the given IDs
+foreach ($STEAMID in $STEAMIDS)
+ {  
+    # simple message  
+    write-host "Downloading SteamID "$STEAMID
+
     # generating arguments string
-    $ARGUMENTS=" +force_install_dir ""$STEAMBASEDIR"" +login anonymous +runscript $CURRENTLOCATION\$CURRENTDATE"".ids"" +quit"
+    $ARGUMENTS=" +force_install_dir ""$STEAMBASEDIR"" +login anonymous +workshop_download_item 365960 $STEAMID +quit"
     
-    # downloading the workshop items
+    # downloading the workshop item
     start-process "$CURRENTLOCATION\SteamCMD\steamcmd.exe" -ArgumentList $ARGUMENTS -NoNewWindow -wait
+    
+    # maybe Steam is thiniking it is a DOS ... so a timeout would be great
+    start-sleep -seconds 10
+ }
+ ###
 
 foreach ($STEAMID in $STEAMIDS)
  {  
