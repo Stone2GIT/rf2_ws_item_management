@@ -38,8 +38,8 @@ if (-not (Test-Path "$CURRENTLOCATION\SteamCMD")) {
 foreach ($STEAMID in $STEAMIDS)
  {  
     write-host "Adding SteamID $STEAMID to steamcmd script."
-    # Add-Content -Path $CURRENTDATE".ids" -value "workshop_download_item 365960 $STEAMID validate"
-    Add-Content -Path $CURRENTDATE".ids" -value "workshop_download_item 365960 $STEAMID"
+    Add-Content -Path $CURRENTDATE".ids" -value "workshop_download_item 365960 $STEAMID validate"
+    # Add-Content -Path $CURRENTDATE".ids" -value "workshop_download_item 365960 $STEAMID"
  }
 
     # simple message  
@@ -73,5 +73,5 @@ foreach ($STEAMID in $STEAMIDS)
 }
 
 # finally we remove the items list
-remove-item $CURRENTLOCATION"*.ids"
+remove-item $CURRENTLOCATION"\*.ids"
  
