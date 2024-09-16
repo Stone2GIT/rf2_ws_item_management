@@ -34,22 +34,22 @@ if (-not (Test-Path "$CURRENTLOCATION\SteamCMD")) {
  start-process -FilePath powershell -ArgumentList $ARGUMENTS -NoNewWindow -Wait
 }
 
-# what to do with the given IDs
-foreach ($STEAMID in $STEAMIDS)
- {  
-    write-host "Adding SteamID $STEAMID to steamcmd script."
-    Add-Content -Path $CURRENTDATE".ids" -value "workshop_download_item 365960 $STEAMID validate"
-    # Add-Content -Path $CURRENTDATE".ids" -value "workshop_download_item 365960 $STEAMID"
- }
+## create SteamCMD script from STEAMIDS
+#foreach ($STEAMID in $STEAMIDS)
+# {  
+#    write-host "Adding SteamID $STEAMID to steamcmd script."
+#    Add-Content -Path $CURRENTDATE".ids" -value "workshop_download_item 365960 $STEAMID validate"
+# }
 
-    # simple message  
-    write-host "Finished generating script file."
+## running the script
+## simple message  
+#write-host "Finished generating script file."
 
-#    # generating arguments string
-#    $ARGUMENTS=" +force_install_dir ""$STEAMBASEDIR"" +login anonymous +runscript $CURRENTLOCATION\$CURRENTDATE"".ids"" +quit"
+## generating arguments string
+#$ARGUMENTS=" +force_install_dir ""$STEAMBASEDIR"" +login anonymous +runscript $CURRENTLOCATION\$CURRENTDATE"".ids"" +quit"
 #    
-#    # downloading the workshop items
-#    start-process "$CURRENTLOCATION\SteamCMD\steamcmd.exe" -ArgumentList $ARGUMENTS -NoNewWindow -wait
+## downloading the workshop items
+#start-process "$CURRENTLOCATION\SteamCMD\steamcmd.exe" -ArgumentList $ARGUMENTS -NoNewWindow -wait
 
 
 ###
@@ -62,11 +62,12 @@ foreach ($STEAMID in $STEAMIDS)
     # generating arguments string
     $ARGUMENTS=" +force_install_dir ""$STEAMBASEDIR"" +login anonymous +workshop_download_item 365960 $STEAMID +quit"
     
-    # downloading the workshop item
-    start-process "$CURRENTLOCATION\SteamCMD\steamcmd.exe" -ArgumentList $ARGUMENTS -NoNewWindow -wait
+    # downloading the workshop item by calling rf2_ws_installer.ps1 script one by one
+    # start-process "$CURRENTLOCATION\SteamCMD\steamcmd.exe" -ArgumentList $ARGUMENTS -NoNewWindow -wait
+    start-process -FilePath powershell -ArgumentList "$CURRENTLOCATION\rf2_ws_item_installer.ps1 $STEAMID" -NoNewWindow -wait
     
     # maybe Steam is thiniking it is a DOS ... so a timeout would be great
-    start-sleep -seconds 10
+    start-sleep -seconds 3
  }
  ###
 
@@ -78,19 +79,19 @@ foreach ($STEAMID in $STEAMIDS)
     # install each RFCMP with modmgr ... assuming modmgr is configured
     foreach ($RFCMP in $RFCMPS)
     {
-        write-host "Installing $RFCMP"
+     write-host "Installing $RFCMP"
 
-	# arguments for installing RFCMP
-        $ARGUMENTS=" -i""$RFCMP"" -p""$RF2WORKSHOPPKGS\$STEAMID"" -d""$RF2ROOT"" -c""$RF2ROOT"" "
+	 # arguments for installing RFCMP
+     $ARGUMENTS=" -i""$RFCMP"" -p""$RF2WORKSHOPPKGS\$STEAMID"" -d""$RF2ROOT"" -c""$RF2ROOT"" "
 
-	# install RFCMP using modmgr
-        start-process -FilePath "$RF2ROOT\bin64\ModMgr.exe" -ArgumentList $ARGUMENTS -nonewwindow -wait
+	 # install RFCMP using modmgr
+     start-process -FilePath "$RF2ROOT\bin64\ModMgr.exe" -ArgumentList $ARGUMENTS -nonewwindow -wait
 
-        # start-process does not really wait for modmgr having finished so we need some xtra wait
-        start-sleep -seconds 3
+     # start-process does not really wait for modmgr having finished so we need some xtra wait
+     start-sleep -seconds 3
     }
 }
 
 # finally we remove the items list
-remove-item $CURRENTLOCATION"\*.ids"
+#remove-item $CURRENTLOCATION"\*.ids"
  
