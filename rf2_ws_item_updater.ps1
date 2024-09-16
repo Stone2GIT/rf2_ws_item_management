@@ -5,6 +5,8 @@
 #
 
 # Notes
+# it seems we need a separate shell for each SteamCMD download call
+# otherwise missing files in SteamID folders are not recognized / downloaded
 
 # source variables
 . ./variables.ps1
@@ -63,7 +65,6 @@ foreach ($STEAMID in $STEAMIDS)
     $ARGUMENTS=" +force_install_dir ""$STEAMBASEDIR"" +login anonymous +workshop_download_item 365960 $STEAMID +quit"
     
     # downloading the workshop item by calling rf2_ws_installer.ps1 script one by one
-    # start-process "$CURRENTLOCATION\SteamCMD\steamcmd.exe" -ArgumentList $ARGUMENTS -NoNewWindow -wait
     start-process -FilePath powershell -ArgumentList "$CURRENTLOCATION\rf2_ws_item_installer.ps1 $STEAMID" -NoNewWindow -wait
     
     # maybe Steam is thiniking it is a DOS ... so a timeout would be great
